@@ -2,13 +2,11 @@ package zak0.github.calendarcountdown.data
 
 import zak0.github.calendarcountdown.util.DateUtil
 import java.io.Serializable
-import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  * Created by jaakko on 24.6.2018.
  */
-class ExcludedDays : Serializable {
+class IncludedDays : Serializable {
 
     private var settings: CountdownSettings? = null
 
@@ -30,11 +28,7 @@ class ExcludedDays : Serializable {
     val daysCount: Int
         get() {
 
-            val today = Date()
-            val dateFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
-            val todayString = dateFormatter.format(today)
             val from = if (fromDateLong > System.currentTimeMillis()) fromDateLong else System.currentTimeMillis()
-            val from_date = if (fromDateLong > System.currentTimeMillis()) dateFormatter.parse(fromDate) else dateFormatter.parse(todayString)
 
             // We need to make sure not to exclude days that are after the end date of this countdown
 
@@ -61,12 +55,6 @@ class ExcludedDays : Serializable {
             // +1 because days are calculated from 0:00 to 0:00
             if (settings?.isExcludeWeekends == true) {
                 totalDays -= CountdownSettings.weekEndDaysInTimeFrame(from, toDateLong)
-            }
-
-            // Reduce specific days from the exclude days
-            // so that specific days are not excluded twice
-            if(settings!!.exclude_only_days_list.size > 0) {
-                totalDays -= settings!!.countWeekdays(from_date, dateFormatter.parse(toDate), settings!!.exclude_only_days_list)
             }
 
             totalDays += 1

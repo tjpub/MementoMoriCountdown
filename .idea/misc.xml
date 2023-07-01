@@ -1,11 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="CMakeSettings">
-    <configurations>
-      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
-    </configurations>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Work/android/CalendarCountdown_update/CalendarCountdown/app/src/main/res/layout/activity_exclude_custom_days.xml" value="0.36614583333333334" />
+        <entry key="..\:/Work/android/CalendarCountdown_update/CalendarCountdown/app/src/main/res/layout/activity_include_exclude_only_custom_days.xml" value="0.36614583333333334" />
+        <entry key="..\:/Work/android/CalendarCountdown_update/CalendarCountdown/app/src/main/res/layout/activity_include_only_custom_days.xml" value="0.19791666666666666" />
+        <entry key="..\:/Work/android/CalendarCountdown_update/CalendarCountdown/app/src/main/res/layout/activity_manage_custom_days.xml" value="0.3651041666666667" />
+        <entry key="..\:/Work/android/CalendarCountdown_update/CalendarCountdown/app/src/main/res/layout/activity_manage_excluded_days.xml" value="0.1875" />
+        <entry key="..\:/Work/android/CalendarCountdown_update/CalendarCountdown/app/src/main/res/layout/activity_setup.xml" value="0.14947916666666666" />
+        <entry key="..\:/Work/android/CalendarCountdown_update/CalendarCountdown/app/src/main/res/layout/dialog_excluded_days.xml" value="0.2734375" />
+        <entry key="..\:/Work/android/CalendarCountdown_update/CalendarCountdown/app/src/main/res/menu/menu_main.xml" value="0.3614583333333333" />
+        <entry key="..\:/Work/android/CalendarCountdown_update/CalendarCountdown/app/src/main/res/menu/menu_setup.xml" value="0.3614583333333333" />
+      </map>
+    </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

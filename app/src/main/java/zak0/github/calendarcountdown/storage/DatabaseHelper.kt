@@ -37,7 +37,6 @@ class DatabaseHelper(context: Context,
     override fun onCreate(db: SQLiteDatabase) {
         initSchema(db)
         Log.d(TAG, "onCreate() - done")
-
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -61,15 +60,40 @@ class DatabaseHelper(context: Context,
     private fun initSchema(db: SQLiteDatabase) {
 
         // create countdown table
+//        var sql = "CREATE TABLE '" + TBLCOUNTDOWN + "' (" +
+//                "`" + COLCOUNTDOWNID + "` INTEGER," +
+//                "`" + COLCDENDDATE + "` TEXT," +
+//                "`" + COLCDEXCLUDEWEEKENDS + "` INTEGER," +
+//                "`" + COLCDLABEL + "` TEXT," +
+//                "`" + COLCDWIDGET + "` INTEGER," +
+//                "PRIMARY KEY(" + COLCOUNTDOWNID + ")" +
+//                ")"
+
+        //include_only_custom_days
+//        var sql = "CREATE TABLE '" + TBLCOUNTDOWN + "' (" +
+//                "`" + COLCOUNTDOWNID + "` INTEGER," +
+//                "`" + COLCDENDDATE + "` TEXT," +
+//                "`" + COLCDEXCLUDEWEEKENDS + "` INTEGER," +
+//                "`" + COLCDLABEL + "` TEXT," +
+//                "`" + COLCDWIDGET + "` INTEGER," +
+//                "`" + COLCDINLIST + "` TEXT," +
+//                "PRIMARY KEY(" + COLCOUNTDOWNID + ")" +
+//                ")"
+
+        //include_exclude_only_custom_days
         var sql = "CREATE TABLE '" + TBLCOUNTDOWN + "' (" +
                 "`" + COLCOUNTDOWNID + "` INTEGER," +
                 "`" + COLCDENDDATE + "` TEXT," +
                 "`" + COLCDEXCLUDEWEEKENDS + "` INTEGER," +
                 "`" + COLCDLABEL + "` TEXT," +
                 "`" + COLCDWIDGET + "` INTEGER," +
+                "`" + COLCDINLIST + "` TEXT," +
+                "`" + COLCDEXLIST + "` TEXT," +
                 "PRIMARY KEY(" + COLCOUNTDOWNID + ")" +
                 ")"
         db.execSQL(sql)
+
+        Log.d(TAG, "create new countdown table sql string is: " + sql)
 
         // create excludeddays table
         sql = "CREATE TABLE `" + TBLEXCLUDEDDAYS + "` (" +
@@ -135,7 +159,6 @@ class DatabaseHelper(context: Context,
                 COLGSSORTBY + ") values (" +
                 gs.sortOrder + ")"
         db?.execSQL(sql)
-
     }
 
     fun loadGeneralSettings() {
@@ -238,6 +261,7 @@ class DatabaseHelper(context: Context,
     fun saveCountdownToDB(settings: CountdownSettings) {
         val list = ArrayList<CountdownSettings>()
         list.add(settings)
+        Log.d("dsfafadfadfadf", settings.daysToEndDate.toString())
         saveToDB(list)
     }
 
@@ -256,17 +280,44 @@ class DatabaseHelper(context: Context,
                 if (cur.count > 0) {
                     // It id already exist --> update existing
                     Log.d(TAG, "saveToDB() - updating countdownid " + Integer.toString(settings.dbId))
+//                    sql = "update " + TBLCOUNTDOWN + " set " + COLCDENDDATE + "='" + settings.endDate + "'," +
+//                            COLCDEXCLUDEWEEKENDS + "=" + (if (settings.isExcludeWeekends) "1" else "0") + "," +
+//                            COLCDLABEL + "='" + settings.label + "'," +
+//                            COLCDWIDGET + "=" + (if (settings.isUseOnWidget) "1" else "0") + " where " + COLCOUNTDOWNID + "=" + Integer.toString(settings.dbId)
+                    // INCLUDE_ONLY_CUSTOM_DAYS
+//                    sql = "update " + TBLCOUNTDOWN + " set " + COLCDENDDATE + "='" + settings.endDate + "'," +
+//                            COLCDEXCLUDEWEEKENDS + "=" + (if (settings.isExcludeWeekends) "1" else "0") + "," +
+//                            COLCDLABEL + "='" + settings.label + "'," +
+//                            COLCDWIDGET + "=" + (if (settings.isUseOnWidget) "1" else "0") +","+ COLCDINLIST +"='" + settings.include_only_days_list_str +  "'"+ " where " + COLCOUNTDOWNID + "=" + Integer.toString(settings.dbId)
+
+                    // INCLUDE_EXCLUDE_ONLY_CUSTOM_DAYS
                     sql = "update " + TBLCOUNTDOWN + " set " + COLCDENDDATE + "='" + settings.endDate + "'," +
                             COLCDEXCLUDEWEEKENDS + "=" + (if (settings.isExcludeWeekends) "1" else "0") + "," +
                             COLCDLABEL + "='" + settings.label + "'," +
-                            COLCDWIDGET + "=" + (if (settings.isUseOnWidget) "1" else "0") + " where " + COLCOUNTDOWNID + "=" + Integer.toString(settings.dbId)
+                            COLCDWIDGET + "=" + (if (settings.isUseOnWidget) "1" else "0") +","+ COLCDINLIST +"='" + settings.include_only_days_list_str +  "'" +","+ COLCDEXLIST +"='" + settings.exclude_only_days_list_str +  "'" + " where " + COLCOUNTDOWNID + "=" + Integer.toString(settings.dbId)
+
+                    Log.d(TAG, "update sql string is: " + sql)
                     db.execSQL(sql)
                 } else {
                     // It did not exist --> insert a new entry
                     Log.d(TAG, "saveToDB() - inserting a new countdown entry")
-                    sql = "insert into " + TBLCOUNTDOWN + "(" + COLCDENDDATE + "," + COLCDEXCLUDEWEEKENDS + "," + COLCDLABEL + "," + COLCDWIDGET + ") " +
+                    Log.d(TAG, "new setting daysToEndDate: "+ settings.daysToEndDate.toString())
+                    Log.d(TAG, "include_only_days_list_str: " + settings.include_only_days_list_str)
+                    Log.d(TAG, "exclude_only_days_list_str:" + settings.exclude_only_days_list_str)
+//                    sql = "insert into " + TBLCOUNTDOWN + "(" + COLCDENDDATE + "," + COLCDEXCLUDEWEEKENDS + "," + COLCDLABEL + "," + COLCDWIDGET + ") " +
+//                            "values('" + settings.endDate + "'," + (if (settings.isExcludeWeekends) "1" else "0") + "," +
+//                            "'" + settings.label + "'," + (if (settings.isUseOnWidget) "1" else "0") + ")"
+
+                    // include_only_custom_days
+//                    sql = "insert into " + TBLCOUNTDOWN + "(" + COLCDENDDATE + "," + COLCDEXCLUDEWEEKENDS + "," + COLCDLABEL + "," + COLCDWIDGET + "," + COLCDINLIST + ") " +
+//                            "values('" + settings.endDate + "'," + (if (settings.isExcludeWeekends) "1" else "0") + "," +
+//                            "'" + settings.label + "'," + (if (settings.isUseOnWidget) "1" else "0") + "," + "'" + settings.include_only_days_list_str + "')"
+                    //exclude_include_only_custom_days
+                    sql = "insert into " + TBLCOUNTDOWN + "(" + COLCDENDDATE + "," + COLCDEXCLUDEWEEKENDS + "," + COLCDLABEL + "," + COLCDWIDGET + "," + COLCDINLIST + "," + COLCDEXLIST + ") " +
                             "values('" + settings.endDate + "'," + (if (settings.isExcludeWeekends) "1" else "0") + "," +
-                            "'" + settings.label + "'," + (if (settings.isUseOnWidget) "1" else "0") + ")"
+                            "'" + settings.label + "'," + (if (settings.isUseOnWidget) "1" else "0") + "," + "'" + settings.include_only_days_list_str + "'" + "," + "'" + settings.exclude_only_days_list_str + "')"
+
+                    Log.d(TAG, "insert new sql string is: " + sql)
                     db.execSQL(sql)
 
                     // Update settings with corresponding rowID.
@@ -342,6 +393,12 @@ class DatabaseHelper(context: Context,
         ret.isExcludeWeekends = cur.getInt(2) == 1
         ret.label = cur.getString(3)
         ret.isUseOnWidget = cur.getInt(4) == 1
+        //only_include_list_str
+        ret.include_only_days_list_str = cur.getString(5)
+        ret.include_only_days_list = ArrayList(ret.include_only_days_list_str.split(","))
+        //only_exclude_list_str
+        ret.exclude_only_days_list_str = cur.getString(6)
+        ret.exclude_only_days_list = ArrayList(ret.exclude_only_days_list_str.split(","))
 
         return ret
     }
@@ -393,5 +450,8 @@ class DatabaseHelper(context: Context,
         private const val COLEDTODATE = "edtodate"
 
         private const val COLGSSORTBY = "gssortby"
+
+        private const val COLCDINLIST = "cdinclude_list"
+        private const val COLCDEXLIST = "cdexclude_list"
     }
 }

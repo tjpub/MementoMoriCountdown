@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CalendarCountdown</string>
+    <string name="app_name">MementoMoriCountdown</string>
     <string name="appwidget_text">Tap to setup</string>
     <string name="add_widget">Add widget</string>
 
@@ -55,4 +55,13 @@
     <string name="add_excluded_days_dialog_add_button">Exclude day range</string>
     <string name="add_excluded_days_dialog_days_not_set_alert_message">Make sure you add both dates before adding excluded days.</string>
 
+    <string-array name="days_array">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 </resources>

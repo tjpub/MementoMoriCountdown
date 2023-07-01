@@ -15,6 +15,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import zak0.github.calendarcountdown.R
 import zak0.github.calendarcountdown.data.CountdownSettings
 import zak0.github.calendarcountdown.storage.DatabaseHelper
@@ -52,6 +53,9 @@ class SetupActivity : AppCompatActivity() {
         setupItems.add(SetupItemType.EXCLUDED_DAYS)
         setupItems.add(SetupItemType.EXCLUDE_WEEKENDS)
         setupItems.add(SetupItemType.USE_ON_WIDGET)
+
+        // INCLUDE ONLY DAYS
+        setupItems.add(SetupItemType.INCLUDE_ONLY_DAYS)
 
         adapter = SetupRecyclerViewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -162,6 +166,8 @@ class SetupActivity : AppCompatActivity() {
                         settings.isExcludeWeekends != isExcludeWeekends ||
                         settings.endDate != endDate ||
                         settings.getExcludedDaysCount() != getExcludedDaysCount()
+                        // include only specific weekdays
+                        settings.onlyIncludedDaysToEndDate != onlyIncludedDaysToEndDate
             }
             closeDb()
         }
@@ -191,6 +197,8 @@ class SetupActivity : AppCompatActivity() {
         DatePickerDialog(this, { _, year, month, dayOfMonth ->
             calendar.set(year, month, dayOfMonth)
             settings.endDate = DateUtil.formatDatabaseDate(calendar.time)
+//            Log.d(TAG, "include_only_custom - days: " + Integer.toString(settings.onlyIncludedDaysToEndDate))
+            Log.d(TAG, "daysToEndDate: " + Integer.toString(settings.daysToEndDate))
             adapter?.notifyDataSetChanged()
         }, calendar[Calendar.YEAR], calendar[Calendar.MONTH], calendar[Calendar.DAY_OF_MONTH])
                 .show()
@@ -203,6 +211,10 @@ class SetupActivity : AppCompatActivity() {
         const val EXCLUDE_WEEKENDS = 300
         const val EXCLUDED_DAYS = 400
         const val USE_ON_WIDGET = 500
+        // custom exclude_include_days
+//        const val CUSTOM_DAYS = 600
+        // include only specific days
+        const val INCLUDE_ONLY_DAYS = 600
     }
 
     private inner class SetupRecyclerViewAdapter : RecyclerView.Adapter<SetupItemViewHolder>() {
@@ -265,6 +277,24 @@ class SetupActivity : AppCompatActivity() {
                             startActivityForResult(intent, ManageExcludedDaysActivity.REQUEST_CODE_MANAGE_EXCLUDED_DAYS)
                         }
                     }
+                    // INCLUDE & EXCLUDE CUSTOM DAYS
+                    SetupItemType.INCLUDE_ONLY_DAYS -> {
+                        title.text = "Include & Exclude Custom days"
+                        if(settings.include_only_days_count != 0 ) {
+                            subtitle.text = "only"+ "${settings.include_only_days_count}" + "days included"
+                        }
+                        else if(settings.specific_exclude_days_count != 0) {
+                            subtitle.text = "${settings.specific_exclude_days_count}" + "days excluded"
+                        }
+                        else {
+                            subtitle.text = "Click here to include & exclude only custom days"
+                        }
+                        setOnClickListener {
+                            val intent = Intent(this@SetupActivity, IncludeExcludeOnlyCustomDaysActivity::class.java)
+                            intent.putExtra(CountdownSettings.extraName, settings)
+                            startActivityForResult(intent, IncludeExcludeOnlyCustomDaysActivity.REQUEST_CODE_INCLUDE_ONLY_CUSTOM_DAYS)
+                        }
+                    }
                     SetupItemType.USE_ON_WIDGET -> {
                         title.text = getString(R.string.setup_setting_use_on_widget)
                         setupCheckbox.visibility = View.VISIBLE
@@ -298,6 +328,28 @@ class SetupActivity : AppCompatActivity() {
                 resultCode == Activity.RESULT_OK) {
             // We MUST have CountdownSettings as the data intent!
             settings = data!!.getSerializableExtra(CountdownSettings.extraName) as CountdownSettings
+            adapter?.notifyDataSetChanged()
+        }
+        // Include only custom weekdays
+        if(requestCode == IncludeExcludeOnlyCustomDaysActivity.REQUEST_CODE_INCLUDE_ONLY_CUSTOM_DAYS && resultCode == Activity.RESULT_OK) {
+            settings = data!!.getSerializableExtra(CountdownSettings.extraName) as CountdownSettings
+
+            if(settings.include_only_days_list.size > 0) {
+                for (day_item in settings.include_only_days_list) {
+//                    Toast.makeText(this@SetupActivity, "${day_item}", Toast.LENGTH_SHORT).show()
+                }
+                Log.d(TAG, "daysToEndDate: " + Integer.toString(settings.daysToEndDate))
+                settings.include_only_days_list_str = settings.include_only_days_list.joinToString(",")
+            }
+            else if(settings.exclude_only_days_list.size > 0) {
+                for (day_item in settings.exclude_only_days_list) {
+                    Toast.makeText(this@SetupActivity, "${day_item}", Toast.LENGTH_SHORT).show()
+//                    Log.d(TAG, "excluded_only_custom_days: " + Integer.toString(settings.specific_exclude_days_count))
+//                    Log.d(TAG, "daysToEndDate: " + Integer.toString(settings.daysToEndDate))
+                }
+                Log.d(TAG, "daysToEndDate: " + Integer.toString(settings.daysToEndDate))
+                settings.exclude_only_days_list_str = settings.exclude_only_days_list.joinToString(",")
+            }
             adapter?.notifyDataSetChanged()
         }
     }
