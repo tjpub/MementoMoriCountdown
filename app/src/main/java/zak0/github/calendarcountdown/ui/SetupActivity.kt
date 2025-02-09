@@ -46,7 +46,8 @@ class SetupActivity : AppCompatActivity() {
         val intent = intent
         settings = intent.getSerializableExtra(CountdownSettings.extraName) as CountdownSettings
 
-        title = "Setup Countdown"
+        title = "" +
+                "Beállítások"
 
         setupItems.add(SetupItemType.TITLE)
         setupItems.add(SetupItemType.THE_DATE)
@@ -55,7 +56,7 @@ class SetupActivity : AppCompatActivity() {
         setupItems.add(SetupItemType.USE_ON_WIDGET)
 
         // INCLUDE ONLY DAYS
-        setupItems.add(SetupItemType.INCLUDE_ONLY_DAYS)
+        //setupItems.add(SetupItemType.INCLUDE_ONLY_DAYS)
 
         adapter = SetupRecyclerViewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -278,23 +279,23 @@ class SetupActivity : AppCompatActivity() {
                         }
                     }
                     // INCLUDE & EXCLUDE CUSTOM DAYS
-                    SetupItemType.INCLUDE_ONLY_DAYS -> {
-                        title.text = "Include & Exclude Custom days"
-                        if(settings.include_only_days_count != 0 ) {
-                            subtitle.text = "only"+ "${settings.include_only_days_count}" + "days included"
-                        }
-                        else if(settings.specific_exclude_days_count != 0) {
-                            subtitle.text = "${settings.specific_exclude_days_count}" + "days excluded"
-                        }
-                        else {
-                            subtitle.text = "Click here to include & exclude only custom days"
-                        }
-                        setOnClickListener {
-                            val intent = Intent(this@SetupActivity, IncludeExcludeOnlyCustomDaysActivity::class.java)
-                            intent.putExtra(CountdownSettings.extraName, settings)
-                            startActivityForResult(intent, IncludeExcludeOnlyCustomDaysActivity.REQUEST_CODE_INCLUDE_ONLY_CUSTOM_DAYS)
-                        }
-                    }
+//                    SetupItemType.INCLUDE_ONLY_DAYS -> {
+//                        title.text = "Include & Exclude Custom days"
+//                        if(settings.include_only_days_count != 0 ) {
+//                            subtitle.text = "only"+ "${settings.include_only_days_count}" + "days included"
+//                        }
+//                        else if(settings.specific_exclude_days_count != 0) {
+//                            subtitle.text = "${settings.specific_exclude_days_count}" + "days excluded"
+//                        }
+//                        else {
+//                            subtitle.text = "Click here to include & exclude only custom days"
+//                        }
+//                        setOnClickListener {
+//                            val intent = Intent(this@SetupActivity, IncludeExcludeOnlyCustomDaysActivity::class.java)
+//                            intent.putExtra(CountdownSettings.extraName, settings)
+//                            startActivityForResult(intent, IncludeExcludeOnlyCustomDaysActivity.REQUEST_CODE_INCLUDE_ONLY_CUSTOM_DAYS)
+//                        }
+//                    }
                     SetupItemType.USE_ON_WIDGET -> {
                         title.text = getString(R.string.setup_setting_use_on_widget)
                         setupCheckbox.visibility = View.VISIBLE

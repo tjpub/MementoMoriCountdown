@@ -119,7 +119,7 @@ class CountdownSettings : Serializable, Comparable<CountdownSettings> {
     val onlyIncludedDaysToEndDate: Int
         get() {
             val today = Date()
-            val dateFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+            val dateFormatter = SimpleDateFormat("yyyy.MM.dd", Locale.ENGLISH)
             val todayString = dateFormatter.format(today)
             val endDateString = endDate // Replace with your end date string in "dd-MM-yyyy" format
             Log.d(TAG, "endDate:"+endDate)
@@ -138,7 +138,7 @@ class CountdownSettings : Serializable, Comparable<CountdownSettings> {
     val onlyExcludedDaysToEndDate: Int
         get() {
             val today = Date()
-            val dateFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+            val dateFormatter = SimpleDateFormat("yyyy.MM.dd", Locale.ENGLISH)
             val todayString = dateFormatter.format(today)
             val endDateString = endDate // Replace with your end date string in "dd-MM-yyyy" format
             val weekdays = ArrayList(exclude_only_days_list_str.split(","))// Replace with your list of weekdays in title case

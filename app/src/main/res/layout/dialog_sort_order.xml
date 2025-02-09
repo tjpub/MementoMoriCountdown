@@ -9,20 +9,20 @@
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:id="@+id/radioDaysLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Days left"
-            android:textSize="@dimen/text_large"
-            android:id="@+id/radioDaysLeft"
-            android:padding="@dimen/activity_horizontal_margin"/>
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="Napok"
+            android:textSize="@dimen/text_large" />
 
         <RadioButton
+            android:id="@+id/radioEventLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Event label"
-            android:textSize="@dimen/text_large"
-            android:id="@+id/radioEventLabel"
-            android:padding="@dimen/activity_horizontal_margin"/>
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="Szöveg"
+            android:textSize="@dimen/text_large" />
 
     </RadioGroup>
     <Button

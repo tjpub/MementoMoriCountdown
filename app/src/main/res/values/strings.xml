@@ -1,59 +1,59 @@
 <resources>
-    <string name="app_name">MementoMoriCountdown</string>
-    <string name="appwidget_text">Tap to setup</string>
+    <string name="app_name">Endre visszaszámolója</string>
+    <string name="appwidget_text">Beállítás</string>
     <string name="add_widget">Add widget</string>
 
-    <string name="common_done">Done</string>
-    <string name="common_cancel">Cancel</string>
-    <string name="common_yes">Yes</string>
-    <string name="common_no">No</string>
-    <string name="common_oops">Oops...</string>
-    <string name="common_okay">Okay</string>
+    <string name="common_done">Kész.</string>
+    <string name="common_cancel">Mégse</string>
+    <string name="common_yes">Igen</string>
+    <string name="common_no">Nem</string>
+    <string name="common_oops">Hoppá...</string>
+    <string name="common_okay">Ok</string>
 
     <string name="placeholder_number">12</string>
-    <string name="placeholder_date">22.8.2018</string>
-    <string name="placeholder_word">Lorem</string>
-    <string name="placeholder_sentence">Sed placerat nibh leo, vitae.</string>
+    <string name="placeholder_date">2024.02.10</string>
+    <string name="placeholder_word">Szöveg</string>
+    <string name="placeholder_sentence">Hosszabb szöveg</string>
 
-    <string name="countdowns_list_days_until">days until</string>
+    <string name="countdowns_list_days_until">nap még</string>
 
-    <string name="setup_setting_countdown_title">Countdown title</string>
-    <string name="setup_setting_end_date">Date</string>
-    <string name="setup_setting_exclude_weekends">Exclude weekends</string>
-    <string name="setup_setting_exclude_weekends_subtitle_disabled">Weekend days are included</string>
-    <string name="setup_setting_exclude_weekends_subtitle_enabled">%d weekend days are excluded</string>
-    <string name="setup_setting_use_on_widget">Use on widget</string>
-    <string name="setup_setting_use_on_widget_subtitle_disabled">Enable to show this countdown on the widget</string>
-    <string name="setup_setting_use_on_widget_subtitle_enabled">This countdown is shown on the widget</string>
-    <string name="setup_setting_excluded_days">Exclude days</string>
-    <string name="setup_setting_excluded_days_subtitle_none">Click to exclude days from countdown</string>
-    <string name="setup_setting_excluded_days_subtitle_set">%d days excluded</string>
+    <string name="setup_setting_countdown_title">Esemény</string>
+    <string name="setup_setting_end_date">Dátum</string>
+    <string name="setup_setting_exclude_weekends">Hétvégék kihagyása</string>
+    <string name="setup_setting_exclude_weekends_subtitle_disabled">Hétvégék beleszámolása</string>
+    <string name="setup_setting_exclude_weekends_subtitle_enabled">%d hétvégi nap kihagyva</string>
+    <string name="setup_setting_use_on_widget">Legyen rajta a widgeten?</string>
+    <string name="setup_setting_use_on_widget_subtitle_disabled">Ne legyen rajta a widgeten</string>
+    <string name="setup_setting_use_on_widget_subtitle_enabled">Legyen a widgeten</string>
+    <string name="setup_setting_excluded_days">Extra napok kihagyása</string>
+    <string name="setup_setting_excluded_days_subtitle_none">Itt lehet a kihagyandó napokat beállítani</string>
+    <string name="setup_setting_excluded_days_subtitle_set">%d extra nap kihagyva</string>
     <string name="setup_excluded_days_from">From %s</string>
     <string name="setup_excluded_days_to">To %s</string>
     <string name="setup_excluded_days_count">%d days</string>
-    <string name="setup_dialog_title_title">What happens at that date?</string>
-    <string name="setup_dialog_title_hint">Something very awesome!</string>
-    <string name="setup_dialog_confirm_delete_title">Are you sure you want to delete this countdown?</string>
-    <string name="setup_dialog_confirm_delete_message">Deletion cannot be undone.</string>
-    <string name="setup_dialog_unsaved_changes_title">You have unsaved changes</string>
-    <string name="setup_dialog_unsaved_changes_message">These changes will be lost if you go back without saving.</string>
-    <string name="setup_dialog_unsaved_changes_positive">Save changes</string>
-    <string name="setup_dialog_unsaved_changes_negative">Go back without saving</string>
-    <string name="setup_dialog_unsaved_changes_neutral">Keep editing</string>
+    <string name="setup_dialog_title_title">Mi történik a megadott napon?</string>
+    <string name="setup_dialog_title_hint">Adj meg valami szöveget!</string>
+    <string name="setup_dialog_confirm_delete_title">Biztosan törölni akarod?</string>
+    <string name="setup_dialog_confirm_delete_message">A törlést nem lehet visszavonni.</string>
+    <string name="setup_dialog_unsaved_changes_title">Nem mentettél!</string>
+    <string name="setup_dialog_unsaved_changes_message">Elvesznek a módosítások ha nem mentesz.</string>
+    <string name="setup_dialog_unsaved_changes_positive">Mentés</string>
+    <string name="setup_dialog_unsaved_changes_negative">Kilépés mentés nélkül</string>
+    <string name="setup_dialog_unsaved_changes_neutral">Folytatni a szerkesztést</string>
 
-    <string name="excluded_days_manager_range_dates"><![CDATA[from <b>%s</b> to <b>%s</b>]]></string>
+    <string name="excluded_days_manager_range_dates"><![CDATA[<b>%s</b> - <b>%s</b>]]></string>
     <string name="excluded_days_manager_range_date"><![CDATA[<b>%s</b>]]></string>
-    <string name="excluded_days_manager_days_excluded">days excluded</string>
-    <string name="excluded_days_manager_day_excluded">day excluded</string>
-    <string name="excluded_days_manager_confirm_delete_title">Are you sure?</string>
-    <string name="excluded_days_manager_confirm_delete_message">Really want to delete %d excluded days from %s to %s?</string>
+    <string name="excluded_days_manager_days_excluded">nap kihagyva</string>
+    <string name="excluded_days_manager_day_excluded">nap kihagyva</string>
+    <string name="excluded_days_manager_confirm_delete_title">Biztos vagy benne?</string>
+    <string name="excluded_days_manager_confirm_delete_message">Biztosan törölsz %d kihagyott napot %s - %s?</string>
 
-    <string name="add_excluded_days_dialog_title">Exclude days</string>
-    <string name="add_excluded_days_dialog_from_title">From</string>
-    <string name="add_excluded_days_dialog_to_title">To</string>
-    <string name="add_excluded_days_dialog_tap_to_set">Tap to set</string>
-    <string name="add_excluded_days_dialog_add_button">Exclude day range</string>
-    <string name="add_excluded_days_dialog_days_not_set_alert_message">Make sure you add both dates before adding excluded days.</string>
+    <string name="add_excluded_days_dialog_title">Kihagyott napok</string>
+    <string name="add_excluded_days_dialog_from_title">Kezdő dátum</string>
+    <string name="add_excluded_days_dialog_to_title">Vége dátum</string>
+    <string name="add_excluded_days_dialog_tap_to_set">Dátum megadása</string>
+    <string name="add_excluded_days_dialog_add_button">Kihagyott napok hozzáadása</string>
+    <string name="add_excluded_days_dialog_days_not_set_alert_message">Add meg a kezdő- és végdátumot is.</string>
 
     <string-array name="days_array">
         <item>Monday</item>

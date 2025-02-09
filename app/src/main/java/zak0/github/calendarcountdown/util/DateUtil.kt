@@ -5,7 +5,7 @@ import java.util.*
 
 object DateUtil {
 
-    private const val FORMAT = "d.M.yyyy"
+    private const val FORMAT = "yyyy.MM.dd"
     private const val DB_FORMAT_STRING = "dd-MM-yyyy"
     private val DB_FORMAT = SimpleDateFormat(DB_FORMAT_STRING, Locale.getDefault())
 

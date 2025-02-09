@@ -22,7 +22,8 @@
             android:name=".ui.ManageExcludedDaysActivity" />
         <activity
             android:name=".ui.IncludeExcludeOnlyCustomDaysActivity" />
-        <receiver android:name=".widget.CountdownAppWidgetProvider">
+        <receiver android:name=".widget.CountdownAppWidgetProvider"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
